@@ -1,0 +1,14 @@
+venv/
+__pycache__/
+*.pyc
+env /
+.env
+#Node
+node_modules/
+dist/
+.build/
+#docker
+*.log
+docker-compose.override.yml
+#os
+.DS_Store
