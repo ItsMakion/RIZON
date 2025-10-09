@@ -1,4 +1,4 @@
-name CI
+name: CI
 on: [push, pull_request]
 
 jobs:
@@ -11,6 +11,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install backend deps
+        working-directory: ./backend
         run: pip install -r backend/requirements.txt
       - name: Run backend tests
         run: pytest -q
@@ -24,7 +25,7 @@ jobs:
         with:
           node-version: '18'
       - name: Install & build frontend
+        working-directory: ./frontend
         run: |
-          cd frontend
           npm ci
           npm run build

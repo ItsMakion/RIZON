@@ -1,11 +1,12 @@
-version: '3.8'
+version: "3.8"
+
 services:
-	db:
- image: postgres:15
+  db:
+    image: postgres:15
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: clearledger
+      POSTGRES_DB: RIZON
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
@@ -16,8 +17,8 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/clearledger
-      - SECRET_KEY=dev_secret_key
+      DATABASE_URL: "postgresql+asyncpg://postgres:postgres@db:5432/RIZON"
+      SECRET_KEY: "dev_secret_key"
     ports:
       - "8000:8000"
     volumes:
@@ -25,12 +26,15 @@ services:
 
   frontend:
     build: ./frontend
+    depends_on:
+      - backend
     ports:
       - "5173:5173"
     volumes:
       - ./frontend:/app
     environment:
-      - CHOKIDAR_USEPOLLING=true
+      CHOKIDAR_USEPOLLING: "true"
 
 volumes:
   db-data:
+
