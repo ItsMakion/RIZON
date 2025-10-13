@@ -1,5 +1,9 @@
 from fastapi.testclient import TestClient
 from app.main import app
 
-client = TestCllient(app)
-def test_root(): r = client.get("/")   assert r.status_code ==200  assert r.json() =={"message": "RIZON API running"}
+client = TestClient(app)
+
+def test_root():
+    response = client.get("/")
+    assert response.status_code == 200
+    assert response.json() == {"message": "RIZON API running"}

@@ -6,24 +6,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install backend deps
+
+      - name: Install backend dependencies
         working-directory: ./backend
-        run: pip install -r backend/requirements.txt
+        run: |
+          pip install --no-cache-dir -r requirements.txt
+
       - name: Run backend tests
+        working-directory: ./backend
         run: pytest -q
 
   frontend-build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+
       - name: Install & build frontend
         working-directory: ./frontend
         run: |
