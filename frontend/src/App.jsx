@@ -147,6 +147,9 @@ function Header() {
           border-radius: 10px;
           outline: none;
           min-width: 220px;
+          font-size: 14px;
+          font-family: inherit;
+          font-palette: var(--bg-1);
           background: #fafafa;
         }
 

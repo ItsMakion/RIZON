@@ -33,7 +33,7 @@ body{
 
 /* Buttons */
 .btn{display:inline-block;text-decoration:none;border-radius:10px;padding:8px 14px;font-weight:600;cursor:pointer}
-.btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;box-shadow:0 8px 20px rgba(30,64,175,0.12);border:none}
+.btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;box-shadow:0 8px 20px rgba(30,64,175,0.12);border:none; background-color: #2563eb;}
 .btn.ghost{background:transparent;border:1px solid rgba(15,23,42,0.06);color:var(--text-dark)}
 .btn.large{padding:12px 20px;font-size:1rem}
 
@@ -196,7 +196,7 @@ body{
 .tab.active{border-bottom-color:var(--accent);font-weight:700}
 .pill{background:#e6eefc;padding:4px 8px;border-radius:999px;margin-left:8px;font-weight:700;color:var(--accent)}
 
-.welcome-banner{display:flex;justify-content:space-between;align-items:center;padding:22px;border-radius:10px;background:linear-gradient(90deg,#1e66ff,#2c50d6);color:#fff;box-shadow:0 8px 20px rgba(42,75,180,0.18);margin-bottom:18px}
+.welcome-banner{display:flex;justify-content:space-between;align-items:center;padding:22px;border-radius:10px;background:linear-gradient(90deg,#1e66ff,#2c50d6); background-color:#2563eb; ;color:#fff;box-shadow:0 8px 20px rgba(42,75,180,0.18);margin-bottom:18px}
 .welcome-left .welcome-title{font-weight:700;font-size:1.15rem}
 .welcome-left .welcome-sub{opacity:0.9}
 .welcome-right{text-align:right}
@@ -214,7 +214,7 @@ body{
 .metric-meta.danger{color:#dc2626}
 
 .lower-grid{display:grid;grid-template-columns:2fr 1fr;gap:20px}
-.card{background:var(--card-bg);padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,0.06);color:var(--text-dark); margin-bottom:20px; margin-top: 20px;}
+.card{background:var(--card-bg);border-radius:10px;box-shadow:0 10px 30px rgba(2,6,23,0.06);color:var(--text-dark); margin-bottom:20px; margin-top: 20px;padding: 15px;}
 .card h3{margin:0 0 10px;font-size:1.05rem}
 .card h3{margin:0 0 10px}
 .activity ul{list-style:none;padding:0;margin:0}
@@ -223,7 +223,7 @@ body{
 .activity-body{flex:1}
 .activity-title{font-weight:700}
 .activity-time{color:var(--muted);font-size:0.9rem;margin-top:6px}
-.card .card-header{display:flex;justify-content:space-between;align-items:center}
+.card .card-header{display:flex;justify-content:space-between;align-items:center; padding: 20px;}
 .chart-placeholder{height:180px; width: 200px;border-radius:8px;background:linear-gradient(180deg,#eef6ff,#fff);display:flex;align-items:center;justify-content:center;color:#0b1724}
 
 /* Chart container tweaks */
@@ -234,7 +234,7 @@ body{
 .hot-tenders .view-all{color:var(--accent)}
 .table-wrap{overflow:auto}
 .tenders-table{width:100%;border-collapse:collapse}
-.tenders-table th{background:var(--accent);color:#fff;padding:18px 16px;text-align:left;font-weight:700}
+.tenders-table th{background:var(--accent);color:#fff;padding:20px 18px;text-align:left;font-weight:700}
 .tenders-table td{padding:18px 16px;border-bottom:1px solid rgba(15,23,42,0.04);vertical-align:middle}
 .tenders-table tbody tr:hover td{background:rgba(14,70,150,0.03)}
 .tenders-table tbody tr.alt td{background:rgba(15,23,42,0.02)}
@@ -306,4 +306,248 @@ body{
   .purchase-screenshot{max-height:240px}
 }
 
+/* ---------- Payments Page Styles ---------- */
 
+.payments-page {
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header Styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.page-title h1 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap:14px
+}
+
+.search {
+  padding: 10px;
+  border-radius: 5px;
+  margin-right: 20px;
+  width: 250px;
+  border: 1px solid rgba(0,0,0,0.08);
+  outline: none;
+  min-width: 220px;
+  background: #fafafa;     
+  color: #000;
+}
+
+.btn {
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.btn.primary {
+  background-color: #2563eb;
+  color: white;
+}
+
+.btn.ghost {
+  background-color: transparent;
+  border: 1px solid #2563eb;
+  color: #2563eb;
+}
+
+/* Payment Overview Section */
+.payment-overview {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.payment-overview .overview-item {
+  background-color: #ebf0f8;
+  padding: 20px;
+  width: 30%;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow:0 10px 30px rgba(2,6,23,0.06);
+  color:var(--text-dark)
+}
+
+.payment-overview h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.payment-overview p {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.payment-overview span {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Tabs Styling */
+.tabs {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.tabs .tab {
+  background-color: #3b82f6;
+  color: white;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.tabs .tab.active {
+  background-color: #2563eb;
+}
+
+/* Table Styling */
+.payments-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.payments-table th,
+.payments-table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.payments-table th {
+  background-color: #f3f4f6;
+  font-size: 16px;
+}
+
+.payments-table td {
+  font-size: 14px;
+}
+
+.payments-table tr:hover {
+  background-color: #f9fafb;
+}
+
+/* Pagination Styling */
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  background-color: #2563eb;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #e2e8f0;
+  cursor: not-allowed;
+}
+
+.btn i {
+  margin-right: 8px; /* Adjust as needed */
+}
+
+/* Styling for individual input fields */
+.input-field {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styling for input labels */
+.input-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Styling for individual input fields */
+.search, .select {
+  width: 150px;
+  padding: 8px;
+  font-size: 14px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  background-color: #fafafa;
+  box-sizing: border-box;
+  border-color: #95aad5;
+  background: #fafafa;
+  color: #000;
+}
+
+.search {
+  width: 100%; /* Make search input span the full width */
+}
+
+.select {
+  width: 150px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Filter button styling */
+.btn.ghost {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: transparent;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  color: #007bff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn.ghost:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn.ghost i {
+  font-size: 18px;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .input-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .search, .select {
+    width: 100%;
+  }
+
+  .btn.ghost {
+    width: 100%;
+  }
+}

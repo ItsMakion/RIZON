@@ -85,7 +85,11 @@ export default function Dashboard(){
           <section className="card cashflow">
             <div className="card-header">
               <h3>Monthly Cashflow</h3>
-              <select className="select-small"><option>Last 6 Months</option></select>
+              <select className="select">
+                <option>Last 6 Months</option>
+                <option>Last 12 Months</option>
+                <option>Year to Date</option>
+                </select>
             </div>
             <hr className="sidebar-divider" />
 
@@ -131,7 +135,7 @@ export default function Dashboard(){
         <section className="card hot-tenders">
           <div className="card-header">
             <h3>Hot Tenders</h3>
-            <a className="view-all" href="#">View All Tenders</a>
+            <a className="view-all" href="#"> View All Tenders </a>
           </div>
 
           <div className="table-wrap">
