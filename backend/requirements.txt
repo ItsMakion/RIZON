@@ -8,3 +8,9 @@ pydantic
 pytest
 httpx
 passlib[bcrypt]
+celery
+redis
+python-jose[cryptography]
+python-multipart
+email-validator
+pydantic-settings
