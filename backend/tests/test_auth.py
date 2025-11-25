@@ -1,7 +1,7 @@
 import pytest
 from httpx import AsyncClient
 
-@pytest.mark.anyio
+@pytest.mark.asyncio
 async def test_register_user(client: AsyncClient):
     response = await client.post(
         "/api/v1/auth/register",
@@ -12,7 +12,7 @@ async def test_register_user(client: AsyncClient):
     assert data["email"] == "test@example.com"
     assert "id" in data
 
-@pytest.mark.anyio
+@pytest.mark.asyncio
 async def test_login_user(client: AsyncClient):
     # First register
     await client.post(

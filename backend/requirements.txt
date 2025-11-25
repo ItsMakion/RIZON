@@ -6,6 +6,7 @@ alembic
 python-dotenv
 pydantic
 pytest
+pytest-asyncio
 httpx
 passlib[bcrypt]
 celery
