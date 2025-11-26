@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Metrics from '../components/Metrics';
 import analyticsService from '../api/analytics';
 import procurementService from '../api/procurement';
+import auditLogsService from '../api/auditLogs';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { useAuth } from '../context/AuthContext';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -30,18 +32,22 @@ ChartJS.register(
 export default function Dashboard() {
   const [stats, setStats] = useState(null);
   const [tenders, setTenders] = useState([]);
+  const [recentActivity, setRecentActivity] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
   const today = new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [dashboardStats, tendersData] = await Promise.all([
+        const [dashboardStats, tendersData, auditLogs] = await Promise.all([
           analyticsService.getDashboardStats(),
-          procurementService.getTenders({ limit: 4 })
+          procurementService.getTenders({ limit: 4 }),
+          auditLogsService.getAuditLogs({ limit: 5 })
         ]);
         setStats(dashboardStats);
         setTenders(tendersData);
+        setRecentActivity(auditLogs);
       } catch (error) {
         console.error('Error fetching dashboard data:', error);
       } finally {
@@ -55,6 +61,24 @@ export default function Dashboard() {
     return <LoadingSpinner message="Loading dashboard..." />;
   }
 
+  // Format activity from audit logs
+  const formatActivity = (log) => {
+    const icons = {
+      'create': '📝',
+      'update': '✏️',
+      'delete': '🗑️',
+      'approve': '✅',
+      'reject': '❌',
+      'process': '💳',
+    };
+
+    return {
+      icon: icons[log.action] || '📋',
+      title: `${log.action} ${log.entity_type}: ${log.entity_id}`,
+      time: new Date(log.timestamp).toLocaleString()
+    };
+  };
+
   return (
     <main className="dashboard">
       <div className="container">
@@ -62,8 +86,8 @@ export default function Dashboard() {
 
         <div className="welcome-banner">
           <div className="welcome-left">
-            <div className="welcome-title">Welcome, John Doe</div>
-            <div className="welcome-sub">Finance Officer</div>
+            <div className="welcome-title">Welcome, {user?.full_name || user?.email || 'User'}</div>
+            <div className="welcome-sub">{user?.role || 'User'}</div>
           </div>
           <div className="welcome-right">
             <div className="today-label">Today's Date</div>
@@ -78,21 +102,24 @@ export default function Dashboard() {
             <h3>Recent Activity</h3>
             <hr className="sidebar-divider" />
             <ul>
-              {[
-                { icon: '📝', title: 'New tender published: "Medical Supplies Procurement"', time: 'Today, 09:45 AM' },
-                { icon: '✅', title: 'Purchase request #PR-2023-089 approved', time: 'Today, 08:30 AM' },
-                { icon: '💳', title: 'Payment batch #PB-443 scheduled for processing', time: 'Yesterday, 4:12 PM' },
-                { icon: '⚠️', title: 'Suspicious transaction detected: Duplicate vendor payment', time: 'Yesterday, 2:45 PM' },
-                { icon: '💰', title: 'New loan recovery payment received: $12,450', time: 'May 15, 11:30 AM' },
-              ].map((a, i) => (
-                <li key={i} className="activity-item">
-                  <div className="activity-icon">{a.icon}</div>
+              {recentActivity.length > 0 ? recentActivity.map((log, i) => {
+                const activity = formatActivity(log);
+                return (
+                  <li key={i} className="activity-item">
+                    <div className="activity-icon">{activity.icon}</div>
+                    <div className="activity-body">
+                      <div className="activity-title">{activity.title}</div>
+                      <div className="activity-time">{activity.time}</div>
+                    </div>
+                  </li>
+                );
+              }) : (
+                <li className="activity-item">
                   <div className="activity-body">
-                    <div className="activity-title">{a.title}</div>
-                    <div className="activity-time">{a.time}</div>
+                    <div className="activity-title">No recent activity</div>
                   </div>
                 </li>
-              ))}
+              )}
             </ul>
           </section>
 

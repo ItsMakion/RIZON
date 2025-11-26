@@ -1,0 +1,171 @@
+{
+  "app": {
+    "title": "RIZON",
+    "tagline": "Revenue & Integrity Zone"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "procurement": "Procurement & Tenders",
+    "purchaseRequests": "Purchase Requests",
+    "payments": "Payments",
+    "revenue": "Revenue",
+    "analytics": "Analytics",
+    "auditLogs": "Audit Logs",
+    "logout": "Logout"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome, {{name}}",
+    "todayDate": "Today's Date",
+    "recentActivity": "Recent Activity",
+    "monthlyCashflow": "Monthly Cashflow",
+    "hotTenders": "Hot Tenders",
+    "viewAllTenders": "View All Tenders",
+    "fraudAlerts": "Potential Fraud Alerts",
+    "viewAllAlerts": "View All Alerts",
+    "noTenders": "No tenders available",
+    "income": "Income",
+    "expenses": "Expenses"
+  },
+  "procurement": {
+    "title": "Procurement & Tenders",
+    "newTender": "New Tender",
+    "allStatus": "All Status",
+    "search": "Search tenders...",
+    "noTenders": "No tenders found",
+    "table": {
+      "tenderId": "TENDER ID",
+      "title": "TITLE",
+      "status": "STATUS",
+      "deadline": "DEADLINE",
+      "bids": "BIDS",
+      "estValue": "EST. VALUE",
+      "actions": "ACTIONS"
+    }
+  },
+  "purchaseRequests": {
+    "title": "Purchase Requests",
+    "newRequest": "New Request",
+    "allStatus": "All Status",
+    "search": "Search requests...",
+    "approve": "Approve",
+    "reject": "Reject",
+    "noRequests": "No purchase requests found",
+    "table": {
+      "requestId": "REQUEST ID",
+      "title": "TITLE",
+      "department": "DEPARTMENT",
+      "requester": "REQUESTER",
+      "status": "STATUS",
+      "value": "VALUE",
+      "actions": "ACTIONS"
+    }
+  },
+  "payments": {
+    "title": "Payments",
+    "newPayment": "New Payment",
+    "allStatus": "All Status",
+    "allMethods": "All Methods",
+    "pendingApproval": "Pending Approval",
+    "scheduled": "Scheduled",
+    "completedMonth": "Completed (Month)",
+    "process": "Process",
+    "noPayments": "No payments found",
+    "table": {
+      "paymentId": "PAYMENT ID",
+      "payee": "PAYEE",
+      "reference": "REFERENCE",
+      "method": "METHOD",
+      "amount": "AMOUNT",
+      "status": "STATUS",
+      "paymentDate": "PAYMENT DATE",
+      "actions": "ACTIONS"
+    }
+  },
+  "revenue": {
+    "title": "Revenue",
+    "newRevenue": "New Revenue",
+    "allStatus": "All Status",
+    "search": "Search revenue...",
+    "noRevenue": "No revenue records found",
+    "table": {
+      "revenueId": "REVENUE ID",
+      "source": "SOURCE",
+      "category": "CATEGORY",
+      "amount": "AMOUNT",
+      "status": "STATUS",
+      "dueDate": "DUE DATE",
+      "collectedDate": "COLLECTED DATE",
+      "actions": "ACTIONS"
+    }
+  },
+  "analytics": {
+    "title": "Analytics & Reports",
+    "procurementTrends": "Procurement Trends",
+    "paymentSummary": "Payment Summary",
+    "procurementByCategory": "Procurement by Category",
+    "noData": "No data available",
+    "table": {
+      "category": "CATEGORY",
+      "count": "COUNT"
+    }
+  },
+  "auditLogs": {
+    "title": "Audit Logs",
+    "allEntities": "All Entities",
+    "allActions": "All Actions",
+    "noLogs": "No audit logs found",
+    "table": {
+      "timestamp": "TIMESTAMP",
+      "action": "ACTION",
+      "entity": "ENTITY",
+      "userId": "USER ID",
+      "ipAddress": "IP ADDRESS",
+      "details": "DETAILS"
+    }
+  },
+  "auth": {
+    "login": "Sign In",
+    "register": "Register",
+    "email": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "fullName": "Full Name",
+    "role": "Role",
+    "selectRole": "Select your role",
+    "loginButton": "Sign In",
+    "registerButton": "Create Account",
+    "noAccount": "Don't have an account?",
+    "registerHere": "Register here",
+    "haveAccount": "Already have an account?",
+    "loginHere": "Login here",
+    "roles": {
+      "admin": "Administrator",
+      "finance_officer": "Finance Officer",
+      "procurement_officer": "Procurement Officer",
+      "analyst": "Analyst"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "import": "Import",
+    "refresh": "Refresh",
+    "close": "Close"
+  },
+  "metrics": {
+    "activeTenders": "Active Tenders",
+    "pendingRequests": "Pending Requests",
+    "pendingPayments": "Pending Payments",
+    "revenueThisMonth": "Revenue This Month"
+  }
+}

@@ -1,0 +1,171 @@
+{
+    "app": {
+        "title": "RIZON",
+        "tagline": "Zone de Revenu et d'Intégrité"
+    },
+    "nav": {
+        "dashboard": "Tableau de Bord",
+        "procurement": "Approvisionnement et Appels d'Offres",
+        "purchaseRequests": "Demandes d'Achat",
+        "payments": "Paiements",
+        "revenue": "Revenus",
+        "analytics": "Analytique",
+        "auditLogs": "Journaux d'Audit",
+        "logout": "Déconnexion"
+    },
+    "dashboard": {
+        "title": "Tableau de Bord",
+        "welcome": "Bienvenue, {{name}}",
+        "todayDate": "Date du Jour",
+        "recentActivity": "Activité Récente",
+        "monthlyCashflow": "Flux de Trésorerie Mensuel",
+        "hotTenders": "Appels d'Offres Actifs",
+        "viewAllTenders": "Voir Tous les Appels d'Offres",
+        "fraudAlerts": "Alertes de Fraude Potentielle",
+        "viewAllAlerts": "Voir Toutes les Alertes",
+        "noTenders": "Aucun appel d'offres disponible",
+        "income": "Revenus",
+        "expenses": "Dépenses"
+    },
+    "procurement": {
+        "title": "Approvisionnement et Appels d'Offres",
+        "newTender": "Nouvel Appel d'Offres",
+        "allStatus": "Tous les Statuts",
+        "search": "Rechercher des appels d'offres...",
+        "noTenders": "Aucun appel d'offres trouvé",
+        "table": {
+            "tenderId": "ID APPEL D'OFFRES",
+            "title": "TITRE",
+            "status": "STATUT",
+            "deadline": "DATE LIMITE",
+            "bids": "OFFRES",
+            "estValue": "VALEUR EST.",
+            "actions": "ACTIONS"
+        }
+    },
+    "purchaseRequests": {
+        "title": "Demandes d'Achat",
+        "newRequest": "Nouvelle Demande",
+        "allStatus": "Tous les Statuts",
+        "search": "Rechercher des demandes...",
+        "approve": "Approuver",
+        "reject": "Rejeter",
+        "noRequests": "Aucune demande d'achat trouvée",
+        "table": {
+            "requestId": "ID DEMANDE",
+            "title": "TITRE",
+            "department": "DÉPARTEMENT",
+            "requester": "DEMANDEUR",
+            "status": "STATUT",
+            "value": "VALEUR",
+            "actions": "ACTIONS"
+        }
+    },
+    "payments": {
+        "title": "Paiements",
+        "newPayment": "Nouveau Paiement",
+        "allStatus": "Tous les Statuts",
+        "allMethods": "Toutes les Méthodes",
+        "pendingApproval": "En Attente d'Approbation",
+        "scheduled": "Programmé",
+        "completedMonth": "Terminé (Mois)",
+        "process": "Traiter",
+        "noPayments": "Aucun paiement trouvé",
+        "table": {
+            "paymentId": "ID PAIEMENT",
+            "payee": "BÉNÉFICIAIRE",
+            "reference": "RÉFÉRENCE",
+            "method": "MÉTHODE",
+            "amount": "MONTANT",
+            "status": "STATUT",
+            "paymentDate": "DATE DE PAIEMENT",
+            "actions": "ACTIONS"
+        }
+    },
+    "revenue": {
+        "title": "Revenus",
+        "newRevenue": "Nouveau Revenu",
+        "allStatus": "Tous les Statuts",
+        "search": "Rechercher des revenus...",
+        "noRevenue": "Aucun enregistrement de revenu trouvé",
+        "table": {
+            "revenueId": "ID REVENU",
+            "source": "SOURCE",
+            "category": "CATÉGORIE",
+            "amount": "MONTANT",
+            "status": "STATUT",
+            "dueDate": "DATE D'ÉCHÉANCE",
+            "collectedDate": "DATE DE COLLECTE",
+            "actions": "ACTIONS"
+        }
+    },
+    "analytics": {
+        "title": "Analytique et Rapports",
+        "procurementTrends": "Tendances d'Approvisionnement",
+        "paymentSummary": "Résumé des Paiements",
+        "procurementByCategory": "Approvisionnement par Catégorie",
+        "noData": "Aucune donnée disponible",
+        "table": {
+            "category": "CATÉGORIE",
+            "count": "NOMBRE"
+        }
+    },
+    "auditLogs": {
+        "title": "Journaux d'Audit",
+        "allEntities": "Toutes les Entités",
+        "allActions": "Toutes les Actions",
+        "noLogs": "Aucun journal d'audit trouvé",
+        "table": {
+            "timestamp": "HORODATAGE",
+            "action": "ACTION",
+            "entity": "ENTITÉ",
+            "userId": "ID UTILISATEUR",
+            "ipAddress": "ADRESSE IP",
+            "details": "DÉTAILS"
+        }
+    },
+    "auth": {
+        "login": "Se Connecter",
+        "register": "S'Inscrire",
+        "email": "Adresse E-mail",
+        "password": "Mot de Passe",
+        "confirmPassword": "Confirmer le Mot de Passe",
+        "fullName": "Nom Complet",
+        "role": "Rôle",
+        "selectRole": "Sélectionnez votre rôle",
+        "loginButton": "Se Connecter",
+        "registerButton": "Créer un Compte",
+        "noAccount": "Vous n'avez pas de compte?",
+        "registerHere": "Inscrivez-vous ici",
+        "haveAccount": "Vous avez déjà un compte?",
+        "loginHere": "Connectez-vous ici",
+        "roles": {
+            "admin": "Administrateur",
+            "finance_officer": "Agent Financier",
+            "procurement_officer": "Agent d'Approvisionnement",
+            "analyst": "Analyste"
+        }
+    },
+    "common": {
+        "loading": "Chargement...",
+        "error": "Erreur",
+        "success": "Succès",
+        "cancel": "Annuler",
+        "save": "Enregistrer",
+        "delete": "Supprimer",
+        "edit": "Modifier",
+        "view": "Voir",
+        "search": "Rechercher",
+        "filter": "Filtrer",
+        "export": "Exporter",
+        "import": "Importer",
+        "refresh": "Actualiser",
+        "close": "Fermer"
+    },
+    "metrics": {
+        "activeTenders": "Appels d'Offres Actifs",
+        "pendingRequests": "Demandes en Attente",
+        "pendingPayments": "Paiements en Attente",
+        "revenueThisMonth": "Revenus ce Mois"
+    }
+}

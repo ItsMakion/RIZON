@@ -39,6 +39,7 @@ async def register_user(user_in: UserCreate, db: AsyncSession = Depends(deps.get
         )
     user = User(
         email=user_in.email,
+        full_name=user_in.full_name,
         hashed_password=security.get_password_hash(user_in.password),
         is_active=user_in.is_active,
         is_superuser=user_in.is_superuser,
@@ -48,3 +49,8 @@ async def register_user(user_in: UserCreate, db: AsyncSession = Depends(deps.get
     await db.commit()
     await db.refresh(user)
     return user
+
+@router.get("/me", response_model=UserResponse)
+async def get_current_user_info(current_user: User = Depends(deps.get_current_user)) -> Any:
+    """Get current user information"""
+    return current_user

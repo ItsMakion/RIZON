@@ -53,13 +53,17 @@ const authService = {
      * @returns {Promise} User data
      */
     async getCurrentUser() {
-        // For now, decode user from token or return stored user
-        // In a real app, you might have a /me endpoint
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            return JSON.parse(storedUser);
+        try {
+            const response = await apiClient.get('/api/v1/auth/me');
+            return response.data;
+        } catch (error) {
+            // Fallback to stored user if API call fails
+            const storedUser = localStorage.getItem('user');
+            if (storedUser) {
+                return JSON.parse(storedUser);
+            }
+            return null;
         }
-        return null;
     },
 
     /**

@@ -6,6 +6,7 @@ import './Login.css'; // Reuse login styles
 const Register = () => {
     const [formData, setFormData] = useState({
         email: '',
+        full_name: '',
         password: '',
         confirmPassword: '',
         role: 'customer',
@@ -40,6 +41,7 @@ const Register = () => {
 
         const result = await register({
             email: formData.email,
+            full_name: formData.full_name,
             password: formData.password,
             role: formData.role,
             is_active: true,
@@ -67,6 +69,20 @@ const Register = () => {
                     <h2>Create Account</h2>
 
                     {error && <div className="error-message">{error}</div>}
+
+                    <div className="form-group">
+                        <label htmlFor="full_name">Full Name</label>
+                        <input
+                            id="full_name"
+                            name="full_name"
+                            type="text"
+                            value={formData.full_name}
+                            onChange={handleChange}
+                            required
+                            placeholder="Enter your full name"
+                            disabled={loading}
+                        />
+                    </div>
 
                     <div className="form-group">
                         <label htmlFor="email">Email</label>

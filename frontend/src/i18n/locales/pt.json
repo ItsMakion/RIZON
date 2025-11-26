@@ -1,0 +1,171 @@
+{
+    "app": {
+        "title": "RIZON",
+        "tagline": "Zona de Receita e Integridade"
+    },
+    "nav": {
+        "dashboard": "Painel",
+        "procurement": "Aquisições e Licitações",
+        "purchaseRequests": "Pedidos de Compra",
+        "payments": "Pagamentos",
+        "revenue": "Receita",
+        "analytics": "Análises",
+        "auditLogs": "Registos de Auditoria",
+        "logout": "Sair"
+    },
+    "dashboard": {
+        "title": "Painel",
+        "welcome": "Bem-vindo, {{name}}",
+        "todayDate": "Data de Hoje",
+        "recentActivity": "Atividade Recente",
+        "monthlyCashflow": "Fluxo de Caixa Mensal",
+        "hotTenders": "Licitações Ativas",
+        "viewAllTenders": "Ver Todas as Licitações",
+        "fraudAlerts": "Alertas de Fraude Potencial",
+        "viewAllAlerts": "Ver Todos os Alertas",
+        "noTenders": "Nenhuma licitação disponível",
+        "income": "Receita",
+        "expenses": "Despesas"
+    },
+    "procurement": {
+        "title": "Aquisições e Licitações",
+        "newTender": "Nova Licitação",
+        "allStatus": "Todos os Status",
+        "search": "Pesquisar licitações...",
+        "noTenders": "Nenhuma licitação encontrada",
+        "table": {
+            "tenderId": "ID LICITAÇÃO",
+            "title": "TÍTULO",
+            "status": "STATUS",
+            "deadline": "PRAZO",
+            "bids": "PROPOSTAS",
+            "estValue": "VALOR EST.",
+            "actions": "AÇÕES"
+        }
+    },
+    "purchaseRequests": {
+        "title": "Pedidos de Compra",
+        "newRequest": "Novo Pedido",
+        "allStatus": "Todos os Status",
+        "search": "Pesquisar pedidos...",
+        "approve": "Aprovar",
+        "reject": "Rejeitar",
+        "noRequests": "Nenhum pedido de compra encontrado",
+        "table": {
+            "requestId": "ID PEDIDO",
+            "title": "TÍTULO",
+            "department": "DEPARTAMENTO",
+            "requester": "SOLICITANTE",
+            "status": "STATUS",
+            "value": "VALOR",
+            "actions": "AÇÕES"
+        }
+    },
+    "payments": {
+        "title": "Pagamentos",
+        "newPayment": "Novo Pagamento",
+        "allStatus": "Todos os Status",
+        "allMethods": "Todos os Métodos",
+        "pendingApproval": "Pendente de Aprovação",
+        "scheduled": "Agendado",
+        "completedMonth": "Concluído (Mês)",
+        "process": "Processar",
+        "noPayments": "Nenhum pagamento encontrado",
+        "table": {
+            "paymentId": "ID PAGAMENTO",
+            "payee": "BENEFICIÁRIO",
+            "reference": "REFERÊNCIA",
+            "method": "MÉTODO",
+            "amount": "MONTANTE",
+            "status": "STATUS",
+            "paymentDate": "DATA DE PAGAMENTO",
+            "actions": "AÇÕES"
+        }
+    },
+    "revenue": {
+        "title": "Receita",
+        "newRevenue": "Nova Receita",
+        "allStatus": "Todos os Status",
+        "search": "Pesquisar receita...",
+        "noRevenue": "Nenhum registo de receita encontrado",
+        "table": {
+            "revenueId": "ID RECEITA",
+            "source": "FONTE",
+            "category": "CATEGORIA",
+            "amount": "MONTANTE",
+            "status": "STATUS",
+            "dueDate": "DATA DE VENCIMENTO",
+            "collectedDate": "DATA DE COBRANÇA",
+            "actions": "AÇÕES"
+        }
+    },
+    "analytics": {
+        "title": "Análises e Relatórios",
+        "procurementTrends": "Tendências de Aquisição",
+        "paymentSummary": "Resumo de Pagamentos",
+        "procurementByCategory": "Aquisição por Categoria",
+        "noData": "Nenhum dado disponível",
+        "table": {
+            "category": "CATEGORIA",
+            "count": "CONTAGEM"
+        }
+    },
+    "auditLogs": {
+        "title": "Registos de Auditoria",
+        "allEntities": "Todas as Entidades",
+        "allActions": "Todas as Ações",
+        "noLogs": "Nenhum registo de auditoria encontrado",
+        "table": {
+            "timestamp": "CARIMBO DE DATA/HORA",
+            "action": "AÇÃO",
+            "entity": "ENTIDADE",
+            "userId": "ID DO USUÁRIO",
+            "ipAddress": "ENDEREÇO IP",
+            "details": "DETALHES"
+        }
+    },
+    "auth": {
+        "login": "Entrar",
+        "register": "Registar",
+        "email": "Endereço de E-mail",
+        "password": "Senha",
+        "confirmPassword": "Confirmar Senha",
+        "fullName": "Nome Completo",
+        "role": "Função",
+        "selectRole": "Selecione sua função",
+        "loginButton": "Entrar",
+        "registerButton": "Criar Conta",
+        "noAccount": "Não tem uma conta?",
+        "registerHere": "Registe-se aqui",
+        "haveAccount": "Já tem uma conta?",
+        "loginHere": "Entre aqui",
+        "roles": {
+            "admin": "Administrador",
+            "finance_officer": "Oficial de Finanças",
+            "procurement_officer": "Oficial de Aquisições",
+            "analyst": "Analista"
+        }
+    },
+    "common": {
+        "loading": "Carregando...",
+        "error": "Erro",
+        "success": "Sucesso",
+        "cancel": "Cancelar",
+        "save": "Guardar",
+        "delete": "Eliminar",
+        "edit": "Editar",
+        "view": "Ver",
+        "search": "Pesquisar",
+        "filter": "Filtrar",
+        "export": "Exportar",
+        "import": "Importar",
+        "refresh": "Atualizar",
+        "close": "Fechar"
+    },
+    "metrics": {
+        "activeTenders": "Licitações Ativas",
+        "pendingRequests": "Pedidos Pendentes",
+        "pendingPayments": "Pagamentos Pendentes",
+        "revenueThisMonth": "Receita Este Mês"
+    }
+}
