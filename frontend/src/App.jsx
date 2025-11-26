@@ -12,6 +12,7 @@ import AuditLogs from './pages/AuditLogs';
 import SystemSettings from './pages/SystemSettings';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import LanguageSwitcher from './components/LanguageSwitcher';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const navItems = [
@@ -137,6 +138,10 @@ function Sidebar({ activePage, setActivePage }) {
           <span className="label">Logout</span>
         </li>
       </ul>
+
+      <div style={{ marginTop: 'auto', padding: '1rem 0' }}>
+        <LanguageSwitcher />
+      </div>
     </aside>
   );
 }
