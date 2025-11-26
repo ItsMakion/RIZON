@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import procurementService from '../api/procurement';
 import LoadingSpinner from '../components/LoadingSpinner';
 import EmptyState from '../components/EmptyState';
+import ExportButton from '../components/ExportButton';
+import './Procurement.css';
 
 export default function Procurement() {
   const [tenders, setTenders] = useState([]);
@@ -97,7 +99,10 @@ export default function Procurement() {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 style={{ minWidth: '250px' }}
               />
-              <button className="btn primary">+ New Tender</button>
+              <div className="flex gap-3">
+                <ExportButton module="procurement" />
+                <button className="btn primary">+ New Tender</button>
+              </div>
             </div>
           </div>
 

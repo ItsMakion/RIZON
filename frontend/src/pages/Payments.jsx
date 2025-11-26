@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import paymentService from '../api/payments';
 import LoadingSpinner from '../components/LoadingSpinner';
 import EmptyState from '../components/EmptyState';
+import ExportButton from '../components/ExportButton';
+import './Payments.css';
 
 export default function Payments() {
   const [payments, setPayments] = useState([]);
@@ -53,7 +55,15 @@ export default function Payments() {
   return (
     <main className="payments">
       <div className="container">
-        <h1 className="page-title">Payments</h1>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="page-title">Payments</h1>
+          <div className="flex gap-3">
+            <ExportButton module="payments" />
+            <button className="btn-primary">
+              + New Payment
+            </button>
+          </div>
+        </div>
 
         {/* Payment Stats */}
         {stats && (
@@ -103,7 +113,6 @@ export default function Payments() {
                 <option value="tnm_mobile">TNM Mobile</option>
                 <option value="check">Check</option>
               </select>
-              <button className="btn primary">+ New Payment</button>
             </div>
           </div>
 

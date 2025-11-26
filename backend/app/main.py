@@ -1,6 +1,6 @@
 from fastapi import FastAPI, WebSocket, Query, status
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.v1.endpoints import auth, procurement, purchase_requests, payments, revenue, audit_logs, analytics, files, roles, notifications
+from app.api.v1.endpoints import auth, procurement, purchase_requests, payments, revenue, audit_logs, analytics, files, roles, notifications, export
 from app.db import engine, Base
 from app.websocket.connection_manager import manager
 from app.core import security
@@ -33,6 +33,7 @@ app.include_router(analytics.router, prefix="/api/v1/analytics", tags=["analytic
 app.include_router(files.router, prefix="/api/v1/files", tags=["files"])
 app.include_router(roles.router, prefix="/api/v1/roles", tags=["roles"])
 app.include_router(notifications.router, prefix="/api/v1/notifications", tags=["notifications"])
+app.include_router(export.router, prefix="/api/v1/export", tags=["export"])
 
 @app.websocket("/ws/{user_id}")
 async def websocket_endpoint(websocket: WebSocket, user_id: int, token: str = Query(...)):
