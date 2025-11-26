@@ -67,11 +67,11 @@ export default function Analytics() {
 
   const paymentChartData = paymentSummary
     ? {
-      labels: Object.keys(paymentSummary.by_method || {}),
+      labels: Object.keys(paymentSummary.by_method || {}).map(k => k.replace('_', ' ')),
       datasets: [
         {
           label: 'Payments by Method',
-          data: Object.values(paymentSummary.by_method || {}),
+          data: Object.values(paymentSummary.by_method || {}).map(item => item.count),
           backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444'],
         },
       ],

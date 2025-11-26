@@ -60,15 +60,18 @@ export default function Payments() {
           <div className="metrics-grid" style={{ marginBottom: '2rem' }}>
             <div className="metric-card">
               <div className="metric-label">Pending Approval</div>
-              <div className="metric-value">{stats.pending_approval || 0}</div>
+              <div className="metric-value">{stats.pending?.count || 0}</div>
+              <div className="metric-meta">${(stats.pending?.amount || 0).toLocaleString()}</div>
             </div>
             <div className="metric-card">
               <div className="metric-label">Scheduled</div>
-              <div className="metric-value">{stats.scheduled || 0}</div>
+              <div className="metric-value">{stats.scheduled?.count || 0}</div>
+              <div className="metric-meta">${(stats.scheduled?.amount || 0).toLocaleString()}</div>
             </div>
             <div className="metric-card">
-              <div className="metric-label">Completed</div>
-              <div className="metric-value">{stats.completed || 0}</div>
+              <div className="metric-label">Completed (Month)</div>
+              <div className="metric-value">{stats.completed_this_month?.count || 0}</div>
+              <div className="metric-meta success">${(stats.completed_this_month?.amount || 0).toLocaleString()}</div>
             </div>
           </div>
         )}
