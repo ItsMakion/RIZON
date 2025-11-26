@@ -146,6 +146,8 @@ function Sidebar({ activePage, setActivePage }) {
   );
 }
 
+import NotificationBell from './components/NotificationBell';
+
 function Header() {
   const { user } = useAuth();
   const today = new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
@@ -183,54 +185,71 @@ function Header() {
           font-size: 14px;
           font-family: inherit;
           font-palette: var(--bg-1);
-          background: #fafafa;
+          background: #f9fafb;
+          transition: all 0.2s;
+        }
+        
+        .search:focus {
+          border-color: #3b82f6;
+          background: #fff;
+          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
-        .btn.ghost.small {
-          border-radius: 8px;
-          padding: 6px 10px;
-          border: 1px solid rgba(0,0,0,0.06);
-          background: transparent;
-        }
-
-        .notif {
-          display: inline-flex;
+        .user-profile {
+          display: flex;
           align-items: center;
-          gap: 8px;
-          padding: 6px 10px;
+          gap: 10px;
+          padding: 6px 12px;
           border-radius: 10px;
-          background: rgba(0,0,0,0.03);
+          background: #f9fafb;
+          border: 1px solid rgba(0,0,0,0.04);
         }
-
-        .notif .badge {
-          background: #e53935;
-          color: #fff;
-          border-radius: 999px;
-          padding: 2px 6px;
-          font-size: 12px;
-        }
-
+        
         .avatar {
-          width: 36px;
-          height: 36px;
-          border-radius: 10px;
-          background: #111827;
-          color: #fff;
-          display: inline-flex;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #3b82f6, #2563eb);
+          color: white;
+          display: flex;
           align-items: center;
           justify-content: center;
-          font-weight: 700;
+          font-weight: 600;
+          font-size: 14px;
+        }
+        
+        .user-info {
+          display: flex;
+          flex-direction: column;
+        }
+        
+        .user-name {
+          font-size: 13px;
+          font-weight: 600;
+          color: #111827;
+        }
+        
+        .user-role {
+          font-size: 11px;
+          color: #6b7280;
         }
       `}</style>
 
       <div className="topbar-left">
-        <input className="search" placeholder="Search..." />
+        <input type="text" placeholder="Search anything..." className="search" />
       </div>
 
       <div className="topbar-right">
-        <button className="btn ghost small">English</button>
-        <div className="notif">🔔<span className="badge">3</span></div>
-        <div className="avatar">{user?.email?.substring(0, 2).toUpperCase() || 'JD'}</div>
+        <NotificationBell />
+        <div className="user-profile">
+          <div className="avatar">
+            {user?.full_name ? user.full_name.charAt(0).toUpperCase() : (user?.email?.charAt(0).toUpperCase() || 'U')}
+          </div>
+          <div className="user-info">
+            <span className="user-name">{user?.full_name || user?.email || 'User'}</span>
+            <span className="user-role">{user?.role || 'User'}</span>
+          </div>
+        </div>
       </div>
     </header>
   );

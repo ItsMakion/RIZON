@@ -1,8 +1,9 @@
-from contextlib import asynccontextmanager
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket, Query, status
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.v1.endpoints import auth, procurement, purchase_requests, payments, revenue, audit_logs, analytics, files, roles
+from app.api.v1.endpoints import auth, procurement, purchase_requests, payments, revenue, audit_logs, analytics, files, roles, notifications
 from app.db import engine, Base
+from app.websocket.connection_manager import manager
+from app.core import security
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -15,12 +16,11 @@ app = FastAPI(title="RIZON API", version="0.1", lifespan=lifespan)
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000"],  # Frontend URLs
+    allow_origins=["http://localhost:5173", "http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 # Register routers
 app.include_router(auth.router, prefix="/api/v1/auth", tags=["auth"])
@@ -32,6 +32,28 @@ app.include_router(audit_logs.router, prefix="/api/v1/audit-logs", tags=["audit-
 app.include_router(analytics.router, prefix="/api/v1/analytics", tags=["analytics"])
 app.include_router(files.router, prefix="/api/v1/files", tags=["files"])
 app.include_router(roles.router, prefix="/api/v1/roles", tags=["roles"])
+app.include_router(notifications.router, prefix="/api/v1/notifications", tags=["notifications"])
+
+@app.websocket("/ws/{user_id}")
+async def websocket_endpoint(websocket: WebSocket, user_id: int, token: str = Query(...)):
+    try:
+        # Verify token
+        payload = security.verify_token(token)
+        token_user_id = int(payload.get("sub"))
+        if token_user_id != user_id:
+            await websocket.close(code=status.WS_1008_POLICY_VIOLATION)
+            return
+    except Exception:
+        await websocket.close(code=status.WS_1008_POLICY_VIOLATION)
+        return
+
+    await manager.connect(websocket, user_id)
+    try:
+        while True:
+            # Keep connection alive
+            await websocket.receive_text()
+    except Exception:
+        manager.disconnect(websocket, user_id)
 
 @app.get("/")
 async def root(): return {"message": "RIZON API running"}
