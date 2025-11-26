@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.v1.endpoints import auth, procurement, purchase_requests, payments, revenue, audit_logs, analytics, files
+from app.api.v1.endpoints import auth, procurement, purchase_requests, payments, revenue, audit_logs, analytics, files, roles
 from app.db import engine, Base
 
 @asynccontextmanager
@@ -31,6 +31,7 @@ app.include_router(revenue.router, prefix="/api/v1/revenue", tags=["revenue"])
 app.include_router(audit_logs.router, prefix="/api/v1/audit-logs", tags=["audit-logs"])
 app.include_router(analytics.router, prefix="/api/v1/analytics", tags=["analytics"])
 app.include_router(files.router, prefix="/api/v1/files", tags=["files"])
+app.include_router(roles.router, prefix="/api/v1/roles", tags=["roles"])
 
 @app.get("/")
 async def root(): return {"message": "RIZON API running"}
