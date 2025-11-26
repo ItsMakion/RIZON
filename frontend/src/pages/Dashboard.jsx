@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Metrics from '../components/Metrics';
+import analyticsService from '../api/analytics';
+import procurementService from '../api/procurement';
+import LoadingSpinner from '../components/LoadingSpinner';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -24,8 +27,33 @@ ChartJS.register(
   Filler
 );
 
-export default function Dashboard(){
+export default function Dashboard() {
+  const [stats, setStats] = useState(null);
+  const [tenders, setTenders] = useState([]);
+  const [loading, setLoading] = useState(true);
   const today = new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [dashboardStats, tendersData] = await Promise.all([
+          analyticsService.getDashboardStats(),
+          procurementService.getTenders({ limit: 4 })
+        ]);
+        setStats(dashboardStats);
+        setTenders(tendersData);
+      } catch (error) {
+        console.error('Error fetching dashboard data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <LoadingSpinner message="Loading dashboard..." />;
+  }
 
   return (
     <main className="dashboard">
@@ -43,7 +71,7 @@ export default function Dashboard(){
           </div>
         </div>
 
-        <Metrics />
+        <Metrics stats={stats} />
 
         <div className="lower-grid">
           <section className="card activity">
@@ -66,20 +94,6 @@ export default function Dashboard(){
                 </li>
               ))}
             </ul>
-            {/* "View All Activities" Button */}
-            <div style={{
-              display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
-                <span 
-                     style={{
-                       fontSize: '18px',
-                       color: '#007bff',       // Blue color to look like a link
-                       cursor: 'pointer',      // Pointer cursor to indicate it's clickable
-                       textDecoration: 'underline', // Makes it look like a link
-                       fontWeight: 'bold' }} 
-                     onClick={() => alert("View All Activities Clicked")}>
-                  View All Activities
-                </span>
-            </div>
           </section>
 
           <section className="card cashflow">
@@ -89,7 +103,7 @@ export default function Dashboard(){
                 <option>Last 6 Months</option>
                 <option>Last 12 Months</option>
                 <option>Year to Date</option>
-                </select>
+              </select>
             </div>
             <hr className="sidebar-divider" />
 
@@ -135,7 +149,7 @@ export default function Dashboard(){
         <section className="card hot-tenders">
           <div className="card-header">
             <h3>Hot Tenders</h3>
-            <a className="view-all" href="#"> View All Tenders </a>
+            <a className="view-all" href="/procurement">View All Tenders </a>
           </div>
 
           <div className="table-wrap">
@@ -152,22 +166,19 @@ export default function Dashboard(){
                 </tr>
               </thead>
               <tbody>
-                {[
-                  ["TN-2023-067","Medical Supplies Procurement","Open","Jun 15, 2023",12,"$250,000"],
-                  ["TN-2023-065","IT Infrastructure Upgrade","Open","Jun 10, 2023",8,"$450,000"],
-                  ["TN-2023-060","School Renovation Project","Evaluation","May 30, 2023",15,"$1,200,000"],
-                  ["TN-2023-056","Road Maintenance Services","Award","May 22, 2023",9,"$850,000"],
-                ].map((r, i) => (
+                {tenders.length > 0 ? tenders.map((tender, i) => (
                   <tr key={i}>
-                    <td className="mono">{r[0]}</td>
-                    <td>{r[1]}</td>
-                    <td><span className={`badge status-${r[2].toLowerCase().replace(/\s+/g,'-')}`}>{r[2]}</span></td>
-                    <td>{r[3]}</td>
-                    <td>{r[4]}</td>
-                    <td>{r[5]}</td>
+                    <td className="mono">{tender.tender_id}</td>
+                    <td>{tender.title}</td>
+                    <td><span className={`badge status-${tender.status}`}>{tender.status}</span></td>
+                    <td>{new Date(tender.deadline).toLocaleDateString()}</td>
+                    <td>{tender.bids_count}</td>
+                    <td>${Number(tender.estimated_value).toLocaleString()}</td>
                     <td className="actions"><button className="icon-btn">👁️</button><button className="icon-btn">✏️</button></td>
                   </tr>
-                ))}
+                )) : (
+                  <tr><td colSpan="7" style={{ textAlign: 'center', padding: '2rem' }}>No tenders available</td></tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -183,9 +194,9 @@ export default function Dashboard(){
 
           <div className="alerts-grid">
             {[
-              {title: 'Duplicate Payment', color: 'red', text: 'Vendor "TechSolutions Ltd" has received multiple payments for the same invoice.'},
-              {title: 'Unusual Approver', color: 'yellow', text: 'Purchase request #PR-2023-078 approved by an uncommon approver.'},
-              {title: 'Split Purchase', color: 'yellow', text: 'Multiple small purchases from "GlobalTech" detected.'},
+              { title: 'Duplicate Payment', color: 'red', text: 'Vendor "TechSolutions Ltd" has received multiple payments for the same invoice.' },
+              { title: 'Unusual Approver', color: 'yellow', text: 'Purchase request #PR-2023-078 approved by an uncommon approver.' },
+              { title: 'Split Purchase', color: 'yellow', text: 'Multiple small purchases from "GlobalTech" detected.' },
             ].map((a, i) => (
               <div key={i} className={`alert-card alert-${a.color}`}>
                 <div className="alert-icon">{a.color === 'red' ? '⚠️' : '💡'}</div>

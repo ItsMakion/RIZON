@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "./context/AuthContext";
 import "./App.css";
 import Dashboard from './pages/Dashboard';
 import Procurement from './pages/Procurement';
@@ -8,18 +10,34 @@ import Revenue from './pages/Revenue';
 import Analytics from './pages/Analytics';
 import AuditLogs from './pages/AuditLogs';
 import SystemSettings from './pages/SystemSettings';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const navItems = [
-  "Dashboard",
-  "Procurement & Tenders",
-  "Purchase Requests",
-  "Payments",
-  "Revenue & Recoveries",
-  "Analytics",
-  "Audit Logs",
+  { name: "Dashboard", path: "/" },
+  { name: "Procurement & Tenders", path: "/procurement" },
+  { name: "Purchase Requests", path: "/purchase-requests" },
+  { name: "Payments", path: "/payments" },
+  { name: "Revenue & Recoveries", path: "/revenue" },
+  { name: "Analytics", path: "/analytics" },
+  { name: "Audit Logs", path: "/audit-logs" },
 ];
 
 function Sidebar({ activePage, setActivePage }) {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleNavigation = (item) => {
+    setActivePage(item.name);
+    navigate(item.path);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <aside
       className="sidebar"
@@ -27,7 +45,7 @@ function Sidebar({ activePage, setActivePage }) {
         fontFamily: "Inter, Roboto, 'Helvetica Neue', Arial, sans-serif",
       }}
     >
-        <style>{`
+      <style>{`
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
           .sidebar {
@@ -53,28 +71,27 @@ function Sidebar({ activePage, setActivePage }) {
             margin-left: 8px;
           }
 
-          /* barely visible divider that stretches edge-to-edge of the sidebar */
           .sidebar-divider {
             height: 1px;
-            background: rgba(0,0,0,0.06); /* very faint */
+            background: rgba(0,0,0,0.06);
             border: none;
             margin: 0;
             display: block;
-            width: calc(100% + 32px); /* extend past typical horizontal padding */
+            width: calc(100% + 32px);
             margin-left: -16px;
             margin-right: -16px;
           }
         `}</style>
 
-        <div className="sidebar-brand" style={{ textAlign: 'center' }}>
-          <h3 style={{ margin: 0 }}>RIZON</h3>
-        </div>
+      <div className="sidebar-brand" style={{ textAlign: 'center' }}>
+        <h3 style={{ margin: 0 }}>RIZON</h3>
+      </div>
 
-        <hr className="sidebar-divider" />
+      <hr className="sidebar-divider" />
 
-        <div className="sidebar-section"><h5>MAIN NAVIGATION</h5></div>
-        <ul className="sidebar-nav">
-          {navItems.map((n) => {
+      <div className="sidebar-section"><h5>MAIN NAVIGATION</h5></div>
+      <ul className="sidebar-nav">
+        {navItems.map((item) => {
           const icons = {
             "Dashboard": "🏠",
             "Procurement & Tenders": "📦",
@@ -84,16 +101,16 @@ function Sidebar({ activePage, setActivePage }) {
             "Analytics": "📊",
             "Audit Logs": "🧾"
           };
-          const icon = icons[n] || "•";
+          const icon = icons[item.name] || "•";
           return (
             <li
-              key={n}
-              className={n === activePage ? "active" : ""}
-              onClick={() => setActivePage(n)}
-              style={{ opacity: n === activePage ? 1 : 0.7, transition: 'opacity 0.2s', cursor: 'pointer' }}
+              key={item.name}
+              className={item.name === activePage ? "active" : ""}
+              onClick={() => handleNavigation(item)}
+              style={{ opacity: item.name === activePage ? 1 : 0.7, transition: 'opacity 0.2s', cursor: 'pointer' }}
             >
               <span className="icon" aria-hidden="true">{icon}</span>
-              <span className="label">{n}</span>
+              <span className="label">{item.name}</span>
             </li>
           );
         })}
@@ -103,11 +120,21 @@ function Sidebar({ activePage, setActivePage }) {
       <ul className="sidebar-nav">
         <li
           className={activePage === "System Settings" ? "active" : ""}
-          onClick={() => setActivePage("System Settings")}
+          onClick={() => {
+            setActivePage("System Settings");
+            navigate('/settings');
+          }}
           style={{ opacity: activePage === "System Settings" ? 1 : 0.7, transition: 'opacity 0.2s', cursor: 'pointer' }}
         >
           <span className="icon" aria-hidden="true">⚙️</span>
           <span className="label">System Settings</span>
+        </li>
+        <li
+          onClick={handleLogout}
+          style={{ opacity: 0.7, transition: 'opacity 0.2s', cursor: 'pointer' }}
+        >
+          <span className="icon" aria-hidden="true">🚪</span>
+          <span className="label">Logout</span>
         </li>
       </ul>
     </aside>
@@ -115,7 +142,9 @@ function Sidebar({ activePage, setActivePage }) {
 }
 
 function Header() {
+  const { user } = useAuth();
   const today = new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
   return (
     <header
       className="topbar"
@@ -128,7 +157,6 @@ function Header() {
       }}
     >
       <style>{`
-        /* soft curves and subtle elevation for the topbar and its controls */
         .topbar {
           background: #fff;
           border-radius: 12px;
@@ -197,32 +225,48 @@ function Header() {
       <div className="topbar-right">
         <button className="btn ghost small">English</button>
         <div className="notif">🔔<span className="badge">3</span></div>
-        <div className="avatar">JD</div>
+        <div className="avatar">{user?.email?.substring(0, 2).toUpperCase() || 'JD'}</div>
       </div>
     </header>
   );
 }
 
-// Metrics moved to components/Metrics.jsx
-
-export default function App() {
+function MainLayout() {
   const [page, setPage] = useState('Dashboard');
-  const today = new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
   return (
     <div className="app-root">
       <Sidebar activePage={page} setActivePage={setPage} />
       <div className="main-area">
         <Header />
-        {page === 'Dashboard' ? <Dashboard /> : null}
-        {page === 'Procurement & Tenders' ? <Procurement /> : null}
-        {page === 'Purchase Requests' ? <PurchaseRequests /> : null}
-        {page === 'Payments' ? <Payments /> : null}
-        {page === 'Revenue & Recoveries' ? <Revenue /> : null}
-        {page === 'Analytics' ? <Analytics /> : null}
-        {page === 'Audit Logs' ? <AuditLogs /> : null}
-        {page === 'System Settings' ? <SystemSettings /> : null}
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/procurement" element={<Procurement />} />
+          <Route path="/purchase-requests" element={<PurchaseRequests />} />
+          <Route path="/payments" element={<Payments />} />
+          <Route path="/revenue" element={<Revenue />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/audit-logs" element={<AuditLogs />} />
+          <Route path="/settings" element={<SystemSettings />} />
+        </Routes>
       </div>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route
+        path="/*"
+        element={
+          <ProtectedRoute>
+            <MainLayout />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
   );
 }
