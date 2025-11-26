@@ -8,6 +8,7 @@ import PurchaseRequests from './pages/PurchaseRequests';
 import Payments from './pages/Payments';
 import Revenue from './pages/Revenue';
 import Analytics from './pages/Analytics';
+import AdvancedAnalytics from './pages/AdvancedAnalytics';
 import AuditLogs from './pages/AuditLogs';
 import SystemSettings from './pages/SystemSettings';
 import Login from './pages/Login';
@@ -268,9 +269,10 @@ function MainLayout() {
           <Route path="/procurement" element={<Procurement />} />
           <Route path="/purchase-requests" element={<PurchaseRequests />} />
           <Route path="/payments" element={<Payments />} />
-          <Route path="/revenue" element={<Revenue />} />
-          <Route path="/analytics" element={<Analytics />} />
-          <Route path="/audit-logs" element={<AuditLogs />} />
+          <Route path="/revenue" element={<ProtectedRoute><Revenue /></ProtectedRoute>} />
+          <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
+          <Route path="/analytics/advanced" element={<ProtectedRoute><AdvancedAnalytics /></ProtectedRoute>} />
+          <Route path="/audit-logs" element={<ProtectedRoute><AuditLogs /></ProtectedRoute>} />
           <Route path="/settings" element={<SystemSettings />} />
         </Routes>
       </div>

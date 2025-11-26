@@ -11,6 +11,33 @@ const analyticsService = {
     },
 
     /**
+     * Get spending trends
+     * @returns {Promise} Spending trends data
+     */
+    async getSpendingTrends() {
+        const response = await apiClient.get('/api/v1/analytics/spending-trends');
+        return response.data;
+    },
+
+    /**
+     * Get vendor performance
+     * @returns {Promise} Vendor performance data
+     */
+    async getVendorPerformance() {
+        const response = await apiClient.get('/api/v1/analytics/vendor-performance');
+        return response.data;
+    },
+
+    /**
+     * Get spending forecast
+     * @returns {Promise} Forecast data
+     */
+    async getForecast() {
+        const response = await apiClient.get('/api/v1/analytics/forecast');
+        return response.data;
+    },
+
+    /**
      * Get procurement trends
      * @returns {Promise} Procurement trends data
      */

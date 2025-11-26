@@ -114,3 +114,128 @@ async def get_payment_summary(
         "by_method": method_summary,
         "by_status": status_summary
     }
+
+@router.get("/spending-trends")
+async def get_spending_trends(
+    db: AsyncSession = Depends(deps.get_db),
+    current_user: User = Depends(deps.get_current_user),
+) -> Any:
+    """Get monthly spending trends for the last 12 months"""
+    end_date = datetime.utcnow()
+    start_date = end_date - timedelta(days=365)
+    
+    query = select(Payment).where(
+        Payment.status == "completed",
+        Payment.payment_date >= start_date
+    )
+    result = await db.execute(query)
+    payments = result.scalars().all()
+    
+    monthly_data = {}
+    for i in range(12):
+        d = end_date - timedelta(days=30 * i)
+        key = d.strftime("%Y-%m")
+        monthly_data[key] = 0
+        
+    for payment in payments:
+        if payment.payment_date:
+            key = payment.payment_date.strftime("%Y-%m")
+            if key in monthly_data:
+                monthly_data[key] += payment.amount
+                
+    labels = sorted(monthly_data.keys())
+    data = [monthly_data[label] for label in labels]
+    
+    return {
+        "labels": labels,
+        "datasets": [
+            {
+                "label": "Monthly Spending",
+                "data": data,
+                "borderColor": "#3b82f6",
+                "backgroundColor": "rgba(59, 130, 246, 0.1)",
+                "fill": True
+            }
+        ]
+    }
+
+@router.get("/vendor-performance")
+async def get_vendor_performance(
+    db: AsyncSession = Depends(deps.get_db),
+    current_user: User = Depends(deps.get_current_user),
+) -> Any:
+    """Get top vendors by spending"""
+    query = select(Payment).where(Payment.status == "completed")
+    result = await db.execute(query)
+    payments = result.scalars().all()
+    
+    vendor_stats = {}
+    for payment in payments:
+        vendor = payment.vendor
+        if vendor not in vendor_stats:
+            vendor_stats[vendor] = {"amount": 0, "count": 0}
+        vendor_stats[vendor]["amount"] += payment.amount
+        vendor_stats[vendor]["count"] += 1
+        
+    sorted_vendors = sorted(vendor_stats.items(), key=lambda x: x[1]["amount"], reverse=True)[:10]
+    
+    return {
+        "labels": [v[0] for v in sorted_vendors],
+        "datasets": [
+            {
+                "label": "Total Spend",
+                "data": [v[1]["amount"] for v in sorted_vendors],
+                "backgroundColor": "#10b981"
+            }
+        ]
+    }
+
+@router.get("/forecast")
+async def get_spending_forecast(
+    db: AsyncSession = Depends(deps.get_db),
+    current_user: User = Depends(deps.get_current_user),
+) -> Any:
+    """Simple spending forecast for next 3 months"""
+    end_date = datetime.utcnow()
+    start_date = end_date - timedelta(days=180)
+    
+    query = select(Payment).where(
+        Payment.status == "completed",
+        Payment.payment_date >= start_date
+    )
+    result = await db.execute(query)
+    payments = result.scalars().all()
+    
+    monthly_totals = {}
+    for payment in payments:
+        if payment.payment_date:
+            key = payment.payment_date.strftime("%Y-%m")
+            monthly_totals[key] = monthly_totals.get(key, 0) + payment.amount
+            
+    if not monthly_totals:
+        return {"labels": [], "datasets": []}
+        
+    values = list(monthly_totals.values())
+    avg_spend = sum(values) / len(values) if values else 0
+    
+    forecast_data = []
+    labels = []
+    current_month = end_date
+    
+    for i in range(1, 4):
+        next_month = current_month + timedelta(days=30 * i)
+        labels.append(next_month.strftime("%Y-%m"))
+        forecast_data.append(avg_spend * (1 + (0.05 * i)))
+        
+    return {
+        "labels": labels,
+        "datasets": [
+            {
+                "label": "Projected Spending",
+                "data": forecast_data,
+                "borderColor": "#8b5cf6",
+                "borderDash": [5, 5],
+                "fill": False
+            }
+        ]
+    }
