@@ -151,7 +151,6 @@ import NotificationBell from './components/NotificationBell';
 
 function Header() {
   const { user } = useAuth();
-  const today = new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
   return (
     <header

@@ -62,7 +62,7 @@ export default function Procurement() {
             </tr>
           </thead>
           <tbody>
-            {tenders.map((tender, i) => (
+            {tenders.map((tender) => (
               <tr key={tender.id}>
                 <td className="mono">{tender.tender_id}</td>
                 <td>{tender.title}</td>

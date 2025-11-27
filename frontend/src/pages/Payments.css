@@ -1,0 +1,145 @@
+.payments {
+    padding: 1rem 0;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.metric-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.metric-label {
+    color: #6b7280;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.metric-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.25rem;
+}
+
+.metric-meta {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.metric-meta.success {
+    color: #10b981;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.select {
+    padding: 0.5rem 2rem 0.5rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: white;
+    font-size: 0.875rem;
+    color: #374151;
+    cursor: pointer;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+.tenders-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+.tenders-table th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    color: #6b7280;
+    font-weight: 500;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+}
+
+.tenders-table td {
+    padding: 0.75rem 1rem;
+    color: #111827;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.tenders-table tr:last-child td {
+    border-bottom: none;
+}
+
+.mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    color: #6b7280;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.status-pending-approval {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+.status-scheduled {
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+.status-processing {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.status-completed {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.status-failed {
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.icon-btn:hover {
+    background: #f3f4f6;
+}

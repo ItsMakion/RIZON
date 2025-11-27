@@ -4,8 +4,10 @@ import analyticsService from '../api/analytics';
 import procurementService from '../api/procurement';
 import auditLogsService from '../api/auditLogs';
 import LoadingSpinner from '../components/LoadingSpinner';
+import FraudAlertWidget from '../components/FraudAlertWidget';
 import { useAuth } from '../context/AuthContext';
 import { Line } from 'react-chartjs-2';
+import './Dashboard.css';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -94,6 +96,8 @@ export default function Dashboard() {
             <div className="today-value">{today}</div>
           </div>
         </div>
+
+        <FraudAlertWidget />
 
         <Metrics stats={stats} />
 
@@ -208,32 +212,6 @@ export default function Dashboard() {
                 )}
               </tbody>
             </table>
-          </div>
-        </section>
-
-        {/* Fraud alerts */}
-        <section className="card alerts-section">
-          <div className="card-header">
-            <h3>Potential Fraud Alerts</h3>
-            <a className="view-all" href="#">View All Alerts</a>
-          </div>
-          <hr className="sidebar-divider" />
-
-          <div className="alerts-grid">
-            {[
-              { title: 'Duplicate Payment', color: 'red', text: 'Vendor "TechSolutions Ltd" has received multiple payments for the same invoice.' },
-              { title: 'Unusual Approver', color: 'yellow', text: 'Purchase request #PR-2023-078 approved by an uncommon approver.' },
-              { title: 'Split Purchase', color: 'yellow', text: 'Multiple small purchases from "GlobalTech" detected.' },
-            ].map((a, i) => (
-              <div key={i} className={`alert-card alert-${a.color}`}>
-                <div className="alert-icon">{a.color === 'red' ? '⚠️' : '💡'}</div>
-                <div className="alert-body">
-                  <div className="alert-title">{a.title}</div>
-                  <div className="alert-text">{a.text}</div>
-                </div>
-                <div className="alert-action"><a href="#">View</a></div>
-              </div>
-            ))}
           </div>
         </section>
       </div>

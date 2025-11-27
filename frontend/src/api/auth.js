@@ -18,7 +18,7 @@ const authService = {
             },
         });
 
-        const { access_token, token_type } = response.data;
+        const { access_token } = response.data;
 
         // Store token
         localStorage.setItem('token', access_token);
@@ -56,7 +56,7 @@ const authService = {
         try {
             const response = await apiClient.get('/api/v1/auth/me');
             return response.data;
-        } catch (error) {
+        } catch {
             // Fallback to stored user if API call fails
             const storedUser = localStorage.getItem('user');
             if (storedUser) {

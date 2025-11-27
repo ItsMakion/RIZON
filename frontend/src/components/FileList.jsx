@@ -27,7 +27,7 @@ export default function FileList({ entityType, entityId }) {
         try {
             await filesService.deleteFile(fileId);
             setFiles(files.filter(f => f.id !== fileId));
-        } catch (error) {
+        } catch {
             alert('Failed to delete file');
         }
     };
